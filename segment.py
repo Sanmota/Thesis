@@ -19,7 +19,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 #Image is loaded with imread command 
-img = cv2.imread('Circuits/93.jpg',0)
+img = cv2.imread('Circuits/75.jpg',0)
 
 #Blurring to reduce some noise
 im_b= cv2.GaussianBlur(img,(5,5),0)
@@ -44,7 +44,7 @@ im_floodfill_inv = cv2.bitwise_not(im_floodfill)
 kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3,3))
 
 #Closing for extraction closed symbols 
-closing = cv2.morphologyEx(im_floodfill_inv, cv2.MORPH_CLOSE, kernel,iterations=3)
+closing = cv2.morphologyEx(im_floodfill_inv, cv2.MORPH_CLOSE, kernel,iterations=5)
 
 #Contouring for closed shape symbols
 im_rec=img.copy()
@@ -107,3 +107,7 @@ for i in range(5):
 plt.show()
 
 
+cv2.namedWindow('image', cv2.WINDOW_NORMAL)
+cv2.imshow('image',closing)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
