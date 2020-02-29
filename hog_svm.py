@@ -13,7 +13,10 @@ import numpy as np
 import seaborn as sn
 import pandas as pd
 from sklearn.svm import SVC
+<<<<<<< HEAD:multiclass_svm.py
+=======
 from sklearn.svm import LinearSVC
+>>>>>>> e97d393df230a6ab94ed9487eae06e7592b4e22d:hog_svm.py
 from sklearn.metrics import classification_report,accuracy_score,confusion_matrix,precision_recall_fscore_support
 
 def get_hog() :
@@ -84,13 +87,23 @@ if __name__ == '__main__':
     labels =  np.array(trainLabel,np.float32).reshape(len(trainLabel),1)
     hog_features = np.array(hog_descriptors,np.float32).reshape(len(hog_descriptors),-1)
     data_frame = np.hstack((hog_features,labels))
+#    np.random.seed(11)
     np.random.shuffle(data_frame)
     
+<<<<<<< HEAD:multiclass_svm.py
+    
+=======
     #Classification   
+>>>>>>> e97d393df230a6ab94ed9487eae06e7592b4e22d:hog_svm.py
     percentage = 80
     partition = int(len(hog_features)*percentage/100)
     x_train, x_test = data_frame[:partition,:-1],  data_frame[partition:,:-1]
     y_train, y_test = data_frame[:partition,-1:].ravel() , data_frame[partition:,-1:].ravel()
+<<<<<<< HEAD:multiclass_svm.py
+    clf = SVC(kernel = 'linear', C = 7500).fit(x_train, y_train)
+    elapsed_time = time.time() - start_time
+    print("elapsed time: {}s".format(round(elapsed_time,2)))
+=======
     clf = SVC(kernel = 'linear', C = 100).fit(x_train, y_train)
     #clf = LinearSVC(C=100).fit(x_train, y_train) 
     
@@ -98,6 +111,7 @@ if __name__ == '__main__':
     elapsed_time = time.time() - start_time
     print("elapsed time: {}s".format(round(elapsed_time,2)))
     
+>>>>>>> e97d393df230a6ab94ed9487eae06e7592b4e22d:hog_svm.py
     y_pred = clf.predict(x_test)
     
     #Applyin K-fold cross validation
@@ -106,6 +120,23 @@ if __name__ == '__main__':
     accuracies.mean()
     accuracies.std()
     
+<<<<<<< HEAD:multiclass_svm.py
+    
+        
+#    # Applying Grid Search to find the best model and the best parameters
+#    from sklearn.model_selection import GridSearchCV
+#    parameters = [{'C': [1, 10, 100, 1000], 'kernel': ['linear']},
+#                  {'C': [1, 10, 100, 1000], 'kernel': ['rbf'], 'gamma': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]}]
+#    grid_search = GridSearchCV(estimator = clf,
+#                               param_grid = parameters,
+#                               scoring = 'accuracy',
+#                               cv = 10,
+#                               n_jobs = -1)
+#    grid_search = grid_search.fit(x_train, y_train)
+#    best_accuracy = grid_search.best_score_
+#    best_parameters = grid_search.best_params_
+=======
+>>>>>>> e97d393df230a6ab94ed9487eae06e7592b4e22d:hog_svm.py
 
 
     print("Accuracy: "+str(accuracy_score(y_test, y_pred)))
